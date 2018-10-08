@@ -1,15 +1,28 @@
 package guru.springframework.domain;
 
+import com.sun.deploy.xml.GeneralEntity;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
  * Created by jt on 11/6/15.
  */
-public class Product implements DomainObject{
+@Entity
+public class Product implements DomainObject {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String description;
+
     private BigDecimal price;
+
     private String imageUrl;
+
+    @Version
+    private Integer version;
 
     public Integer getId() {
         return id;
@@ -41,5 +54,13 @@ public class Product implements DomainObject{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }
