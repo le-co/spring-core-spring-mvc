@@ -61,7 +61,7 @@ public class ProductServiceJpaImpl implements ProductService {
 
         em.getTransaction().begin();
 
-        em.remove(this.getById(id));
+        em.remove(em.find(Product.class, id));
 
         em.getTransaction().commit();
 
