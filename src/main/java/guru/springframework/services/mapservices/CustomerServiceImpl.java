@@ -1,8 +1,11 @@
 package guru.springframework.services.mapservices;
 
+import guru.springframework.commands.CustomerForm;
+import guru.springframework.converters.CustomerFormToCustomer;
 import guru.springframework.domain.Customer;
 import guru.springframework.domain.DomainObject;
 import guru.springframework.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,13 @@ import java.util.List;
 @Service
 @Profile("map")
 public class CustomerServiceImpl extends AbstractMapService implements CustomerService {
+
+    private CustomerFormToCustomer converter;
+
+    @Autowired
+    public void setConverter(CustomerFormToCustomer converter) {
+        this.converter = converter;
+    }
 
     @Override
     public List<DomainObject> listAll() {
@@ -35,4 +45,9 @@ public class CustomerServiceImpl extends AbstractMapService implements CustomerS
         super.delete(id);
     }
 
+    @Override
+    public Customer saveOrUpdateCustomerForm(CustomerForm customerForm) {
+        Customer convert = this.converter.convert(customerForm);
+        return (Customer) super.saveOrUpdate(convert);
+    }
 }

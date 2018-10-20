@@ -12,7 +12,7 @@ import java.util.List;
  * Created by jt on 12/16/15.
  */
 @Service
-@Profile("jpadao")
+@Profile("jpadaodecripted")
 public class OrderServiceJpaDaoImpl extends AbstractJpaDaoService implements OrderService {
 
     @Override
