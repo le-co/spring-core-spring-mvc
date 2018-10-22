@@ -14,10 +14,12 @@ public class User extends AbstractDomainClass  {
 
     private String username;
 
-    @Transient
+    @Column(length = 60)
     private String password;
 
+    @Column(length = 60)
     private String encryptedPassword;
+
     private Boolean enabled = true;
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
