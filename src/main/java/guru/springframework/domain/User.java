@@ -18,6 +18,9 @@ public class User extends AbstractDomainClass  {
     private String password;
 
     private String encryptedPassword;
+
+    private Integer failAuthentication = 0;
+
     private Boolean enabled = true;
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -87,6 +90,14 @@ public class User extends AbstractDomainClass  {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getFailAuthentication() {
+        return failAuthentication;
+    }
+
+    public void setFailAuthentication(Integer failAuthentication) {
+        this.failAuthentication = failAuthentication;
     }
 
     public void addRole(Role role){
